@@ -3,6 +3,20 @@ event classification using nn for VLQ example
 
 NN workflow (WIP):
 
+0. setup
+```
+(in terminal)
+cd work
+git clone https://github.com/sarakm0704/VectorLikeQlassification.git
+cd VectorLikeQlassification
+mkdir ev
+python -m venv ev
+source ev/bin/activate
+(then you are in virtualenv. Maybe you can even put it as alias)
+pip install numpy
+conda install -c conda-forge root
+```
+
 1. preprocessing
 ntuple will be provided. Convert root file into hdf format
 ```
