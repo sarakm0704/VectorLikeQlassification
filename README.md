@@ -5,7 +5,7 @@ NN workflow (WIP):
 
 0. setup
 ```
-(in terminal)
+(in your laptop)
 cd work
 git clone https://github.com/sarakm0704/VectorLikeQlassification.git
 cd VectorLikeQlassification
@@ -15,6 +15,18 @@ source ev/bin/activate
 (then you are in virtualenv. Maybe you can even put it as alias)
 pip install numpy
 conda install -c conda-forge root
+```
+
+```
+(in lyoserv)
+source /cvmfs/sft-nightlies.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh
+cd work
+git clone https://github.com/sarakm0704/VectorLikeQlassification.git
+cd VectorLikeQlassification
+mkdir ev
+python -m venv ev
+source ev/bin/activate
+pip install deepdish
 ```
 
 1. preprocessing
