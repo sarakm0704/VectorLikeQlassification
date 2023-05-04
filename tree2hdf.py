@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
     if options.deep:
         makeCombi(ntupleDir, 'tprime700_2018_had.root', arrayDir, True)
-        #makeCombi(ntupleDir, 'TTToHadronic.root', arrayDir, True)
+        makeCombi(ntupleDir, 'tthad2018.root', arrayDir, True)
 
     if options.random:
         random(arrayDir,"array_trainInput.h5")
