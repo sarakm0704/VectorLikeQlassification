@@ -17,7 +17,7 @@ def random(arrayDir,target):
     print("Done")
 
 def merge(arrayDir):
-
+    print("hi")
     selEvent = pd.DataFrame([])
 
     for process in os.listdir(arrayDir+'/split/'):
@@ -42,7 +42,7 @@ def makeCombi(inputDir, inputFile, outputDir, makeTrainingInput=False):
     data = False
     if 'Data' in inputDir: data = True
     tprime = False
-    if 'Tprime' in inputFile: tprime = True
+    if 'tprime' in inputFile: tprime = True
 
     jetCombi = []
 
@@ -98,67 +98,12 @@ def makeCombi(inputDir, inputFile, outputDir, makeTrainingInput=False):
         jet4_btag = chain.selJet4_btag
         jet5_btag = chain.selJet5_btag
 
-        bjet1_pt = chain.selbJet1_pt
-        bjet2_pt = chain.selbJet2_pt
-
-        bjet1_pt = chain.selbJet1_pt_massnom
-        bjet2_pt = chain.selbJet2_pt_massnom
-
-        bjet1_eta = chain.selbJet1_eta
-        bjet2_eta = chain.selbJet2_eta
-
-        bjet1_e = chain.selbJet1_e
-        bjet2_e = chain.selbJet2_e
-
-        bjet1_e_massnom = chain.selbJet1_e_massnom
-        bjet2_e_massnom = chain.selbJet2_e_massnom
-
-        bjet1_btag = chain.selbJet1_btag
-        bjet2_btag = chain.selbJet2_btag
-
-        goodht = chain.goodHT
-        relht = chain.RelHT
-        newrelht = chain.newRelHT
-
-        mindR_dRbb = chain.mindR_dRbb
-        mindR_mbb = chain.mindR_mbb
-
-        Chi2_max = chain.Chi2_max
-        Chi2_min = chain.Chi2_min
-        Chi2_min_H = chain.Chi2_min_H
-        Chi2_min_W = chain.Chi2_min_W
-        Chi2_min_Top = chain.Chi2_min_Top
-
-        dR_hbb = chain.dRHbb_chi2
-        dR_wjj = chain.dRWjj_chi2
-        dR_bw = chain.dRbW_chi2
-
-        dR_tprimeoj = chain.dRTprimeoj_chi2
-        dR_htop = chain.dRHTop_chi2
-        dEta_wh = chain.dEtaWH_chi2
-        dPhi_htop = chain.dPhiHTop_chi2
-
-        mass_h = chain.H_mass
-        mass_w = chain.W_mass
-        mass_top = chain.Top_mass
-
-        mass_wh = chain.invmass_WH
-        mass_secondtop = chain.invmass_2ndTop
-        mass_tprime = chain.invmass_Tprime
-        mass_leadjets = chain.invmass_leadjets
-
-        ratio_mass_topH = chain.R_TopH
-        ratio_mass_secondtopW = chain.R_2ndTopW
-
-        ratio_pt_topsecondtop = chain.Rpt_Top2ndTop
-        ratio_pt_htoptprime = chain.Rpt_HTopTprime
-        ratio_pt_tprimehtprimetop = chain.Rpt_TprimeHTprimeTop
-
-        jetCombi.append([signal, event, nseljets, nselbjets, goodht, relht, mindR_dRbb, mindR_mbb, jet1_pt, jet2_pt, jet3_pt, jet4_pt, jet5_pt, jet1_eta, jet2_eta, jet3_eta, jet4_eta, jet5_eta, jet1_e, jet2_e, jet3_e, jet4_e, jet5_e, jet1_btag, jet2_btag, jet3_btag, jet4_btag, jet5_btag, bjet1_pt, bjet2_pt, bjet1_eta, bjet2_eta, bjet1_e, bjet2_e, bjet1_btag, bjet2_btag, jet1_pt_massnom, jet2_pt_massnom, jet3_pt_massnom, jet4_pt_massnom, jet5_pt_massnom, jet1_e_massnom, jet2_e_massnom, jet3_e_massnom, jet4_e_massnom, jet5_e_massnom, bjet1_e_massnom, bjet2_e_massnom, Chi2_max, Chi2_min, Chi2_min_H, Chi2_min_W, Chi2_min_Top, mass_h, mass_w, mass_top, mass_wh, mass_secondtop, mass_tprime, mass_leadjets, dR_hbb, dR_wjj, dR_bw, dR_tprimeoj, dR_htop, dEta_wh, dPhi_htop, ratio_mass_topH, ratio_mass_secondtopW, ratio_pt_topsecondtop, ratio_pt_htoptprime, ratio_pt_tprimehtprimetop, evWeight])
+        jetCombi.append([signal, event, nseljets, nselbjets, jet1_pt, jet2_pt, jet3_pt, jet4_pt, jet5_pt, jet1_eta, jet2_eta, jet3_eta, jet4_eta, jet5_eta, jet1_e, jet2_e, jet3_e, jet4_e, jet5_e, jet1_btag, jet2_btag, jet3_btag, jet4_btag, jet5_btag, evWeight])
 
     tmp = inputFile[:-5]
 
-    combi = pd.DataFrame(jetCombi,columns=['signal','event','nseljets','nselbjets','goodht','relht','mindR_dRbb','mindR_mbb','jet1_pt','jet2_pt','jet3_pt','jet4_pt','jet5_pt','jet1_eta','jet2_eta','jet3_eta','jet4_eta','jet5_eta','jet1_e','jet2_e','jet3_e','jet4_e','jet5_e','jet1_btag','jet2_btag','jet3_btag','jet4_btag','jet5_btag','bjet1_pt','bjet2_pt','bjet1_eta','bjet2_eta','bjet1_e','bjet2_e','bjet1_btag','bjet2_btag','jet1_pt_massnom','jet2_pt_massnom','jet3_pt_massnom','jet4_pt_massnom','jet5_pt_massnom','jet1_e_massnom','jet2_e_massnom','jet3_e_massnom','jet4_e_massnom','jet5_e_massnom','bjet1_e_massnom','bjet2_e_massnom','Chi2_max','Chi2_min','Chi2_min_H','Chi2_min_W','Chi2_min_Top','mass_h','mass_w','mass_top','mass_wh','mass_secondtop','mass_tprime','mass_leadjets','dR_hbb','dR_wjj','dR_bw','dR_tprimeoj','dR_htop','dEta_wh','dPhi_htop','ratio_mass_topH','ratio_mass_secondtopW','ratio_pt_topsecondtop','ratio_pt_htoptprime','ratio_pt_tprimehtprimetop','evWeight'])
+    combi = pd.DataFrame(jetCombi,columns=['signal','event','nseljets','nselbjets','jet1_pt','jet2_pt','jet3_pt','jet4_pt','jet5_pt','jet1_eta','jet2_eta','jet3_eta','jet4_eta','jet5_eta','jet1_e','jet2_e','jet3_e','jet4_e','jet5_e','jet1_btag','jet2_btag','jet3_btag','jet4_btag','jet5_btag',
+'evWeight'])
 
     if makeTrainingInput: combi = combi
     else: combi = combi.drop(['signal'], axis=1)
@@ -216,7 +161,7 @@ if __name__ == '__main__':
         merge(arrayDir)
 
     if options.deep:
-        makeCombi(ntupleDir, 'tprime700_had.root', arrayDir, True)
+        makeCombi(ntupleDir, 'tprime700_2018_had.root', arrayDir, True)
         #makeCombi(ntupleDir, 'TTToHadronic.root', arrayDir, True)
 
     if options.random:
