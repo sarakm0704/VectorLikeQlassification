@@ -5,13 +5,20 @@ NN workflow (WIP):
 
 0. setup
 ```
-(in your laptop / lyoserv)
+# in lyoserv start with: 
+# wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
+# source Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
+# (log out from server and log in again)
+
+pip install pandas
+pip install deepdish
+pip install matplotlib
+pip install -U scikit-learn
+conda install -c conda-forge root
+conda install -c conda-forge tensorflow
 cd work
 git clone https://github.com/sarakm0704/VectorLikeQlassification.git
 cd VectorLikeQlassification
-conda install -c conda-forge root
-pip install pandas
-pip install deepdish
 ```
 
 1. preprocessing
