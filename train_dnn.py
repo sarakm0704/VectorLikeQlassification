@@ -20,13 +20,12 @@ from keras.regularizers import l2
 from tensorflow.keras.optimizers import Adam
 from keras.callbacks import ModelCheckpoint
 
-trainInput = '/pbs/home/j/jechoi/work/vlq/nn/array/array_trainInput_shuffled.h5'
-
-#cut6
-#name_inputvar=['Chi2_min', 'h_mass', 'secondTop_mass', 'njets', 'nbjets', 'goodHT', 'jet1_eta', 'jet2_eta', 'jet3_eta', 'jet4_eta', 'jet5_eta', 'jet1_btag', 'jet2_btag', 'jet3_btag', 'jet4_btag', 'jet5_btag', 'bjet1_eta', 'bjet2_eta', 'bjet1_e_massnom', 'bjet2_e_massnom', 'bjet1_btag', 'bjet2_btag', 'jet1_e_massnom', 'jet2_e_massnom', 'jet3_e_massnom', 'jet4_e_massnom', 'jet5_e_massnom','RelHT','Chi2_max','Chi2_dRHbb','Chi2_min_H','Chi2_dRWjj','Chi2_dRbW']
+trainInput = './arrayOut/array_trainInput_shuffled.h5'
 
 # no mass dependents
-name_inputvar=['nseljets', 'nselbjets', 'goodht', 'relht', 'mindR_dRbb', 'mindR_mbb', 'jet1_eta', 'jet2_eta', 'jet3_eta', 'jet4_eta', 'jet5_eta', 'jet1_btag', 'jet2_btag', 'jet3_btag', 'jet4_btag', 'jet5_btag', 'bjet1_eta', 'bjet2_eta', 'bjet1_btag', 'bjet2_btag', 'jet1_e_massnom', 'jet2_e_massnom', 'jet3_e_massnom', 'jet4_e_massnom', 'jet5_e_massnom', 'bjet1_e_massnom', 'bjet2_e_massnom', 'Chi2_max', 'Chi2_min', 'Chi2_min_H', 'Chi2_min_W', 'Chi2_min_Top', 'mass_h', 'mass_w', 'mass_top', 'mass_wh', 'mass_secondtop', 'mass_leadjets', 'dR_hbb', 'dR_wjj', 'dR_bw', 'dR_tprimeoj', 'dPhi_htop', 'ratio_mass_topH', 'ratio_mass_secondtopW', 'ratio_pt_topsecondtop', 'ratio_pt_htoptprime', 'ratio_pt_tprimehtprimetop']
+#name_inputvar=['nseljets', 'nselbjets', 'goodht', 'relht', 'mindR_dRbb', 'mindR_mbb', 'jet1_eta', 'jet2_eta', 'jet3_eta', 'jet4_eta', 'jet5_eta', 'jet1_btag', 'jet2_btag', 'jet3_btag', 'jet4_btag', 'jet5_btag', 'bjet1_eta', 'bjet2_eta', 'bjet1_btag', 'bjet2_btag', 'jet1_e_massnom', 'jet2_e_massnom', 'jet3_e_massnom', 'jet4_e_massnom', 'jet5_e_massnom', 'bjet1_e_massnom', 'bjet2_e_massnom', 'Chi2_max', 'Chi2_min', 'Chi2_min_H', 'Chi2_min_W', 'Chi2_min_Top', 'mass_h', 'mass_w', 'mass_top', 'mass_wh', 'mass_secondtop', 'mass_leadjets', 'dR_hbb', 'dR_wjj', 'dR_bw', 'dR_tprimeoj', 'dPhi_htop', 'ratio_mass_topH', 'ratio_mass_secondtopW', 'ratio_pt_topsecondtop', 'ratio_pt_htoptprime', 'ratio_pt_tprimehtprimetop']
+# for test
+name_inputvar=['nseljets', 'nselbjets', 'jet1_pt', 'jet2_pt', 'jet3_pt', 'jet4_pt', 'jet5_pt', 'jet1_eta', 'jet2_eta', 'jet3_eta', 'jet4_eta', 'jet5_eta', 'jet1_e', 'jet2_e', 'jet3_e', 'jet4_e', 'jet5_e', 'jet1_btag', 'jet2_btag', 'jet3_btag', 'jet4_btag', 'jet5_btag', 'evWeight']
 
 print ("number of variables: "+str(len(list(name_inputvar))))
 
@@ -137,7 +136,11 @@ if os.path.exists("models/"+model_name+'/model.h5'):
     print("\nModel exists already!\n")
     model = load_model("models/"+model_name+'/model.h5')
 else:
-    adam=tf.keras.optimizers.Adam(learning_rate=1E-3, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=1E-3)
+    # TF < 2.3 style
+    #adam=tf.keras.optimizers.Adam(learning_rate=1E-3, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=1E-3)
+    # TF >= 2.3 style
+    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=0.01, decay_steps=10000, decay_rate=0.9)
+    adam = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy','binary_accuracy'])
     checkpoint = ModelCheckpoint(model_name, monitor='val_binary_accuracy', verbose=1, save_best_only=False)
     history = model.fit(train_data, train_label,
