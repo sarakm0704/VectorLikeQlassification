@@ -5,27 +5,12 @@ NN workflow (WIP):
 
 0. setup
 ```
-(in your laptop)
+(in your laptop / lyoserv)
 cd work
 git clone https://github.com/sarakm0704/VectorLikeQlassification.git
 cd VectorLikeQlassification
-mkdir ev
-python -m venv ev
-source ev/bin/activate
-(then you are in virtualenv. Maybe you can even put it as alias)
-pip install numpy
 conda install -c conda-forge root
-```
-
-```
-(in lyoserv)
-source /cvmfs/sft-nightlies.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh
-cd work
-git clone https://github.com/sarakm0704/VectorLikeQlassification.git
-cd VectorLikeQlassification
-mkdir ev
-python -m venv ev
-source ev/bin/activate
+pip install pandas
 pip install deepdish
 ```
 
@@ -35,6 +20,26 @@ ntuple will be provided. Convert root file into hdf format
 python tree2hdf.py -d (for converting files for deep learning)
 python tree2hdf.py -m (for merging files from input files (signal + background purpose))
 python tree2hdf.py -r (for shuffling indices from input file))
+```
+in lyoserv you can submit job via slurm batch system, by using ```sbatch sjob_convert.sh```, ```sjob_convert.sh``` would look like:
+```
+#!/bin/bash
+
+#SBATCH --job-name=VLQlassification
+#SBATCH --output=log/std_m1_convert.out
+#SBATCH --error=log/std_m1_convert.err
+
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=YOUREMAIL
+
+python3 tree2hdf.py -d
+wait
+python3 tree2hdf.py -m
+wait
+python3 tree2hdf.py -r
 ```
 
 2. training
