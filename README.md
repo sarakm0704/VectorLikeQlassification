@@ -54,23 +54,19 @@ Train NN : you can even try different network: (shallow) DNN / RNN / CNN
 ```
 python training_dnn.py
 ```
-or
-```
-python training_cnn.py
-```
 
 3. evaluation
 Evaluation using different dataset that are not used for training
-- Using ```ecid_afterTraining.py```<br>
-do **E**valuation and extract **C**orrelations, **I**mportance, **D**istributions of features after training
+- Using ```afterTraining.py```<br>
+draw input **V**ariables, extract **I**mportance, **C**orrelations, and do **E**valuation after training
 
 ```
-python ecid_afterTraining -e -i -c -d
+python afterTraining -v -i -c -e 
 ```
-- ```-e```: do Evaluation of model
+- ```-v```: Draw Input variable Distributions
 - ```-i```: Extract Feature Importance
 - ```-c```: Extract Correlations
-- ```-d```: Draw Input variable Distributions
+- ```-e```: do Evaluation of model
 
 4. performance
 Compare the performance by drawing ROC curve
