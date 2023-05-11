@@ -28,26 +28,23 @@ python tree2hdf.py -d (for converting files for deep learning)
 python tree2hdf.py -m (for merging files from input files (signal + background purpose))
 python tree2hdf.py -r (for shuffling indices from input file))
 ```
-in lyoserv you can submit job via slurm batch system, by using ```sbatch sjob_convert.sh```, ```sjob_convert.sh``` would look like:
+in lyoserv you can submit job via slurm batch system, by using ```sbatch sjob.sh```, ```sjob.sh``` would look like:
 ```
 #!/bin/bash
 
-#SBATCH --job-name=VLQlassification
-#SBATCH --output=log/std_m1_convert.out
-#SBATCH --error=log/std_m1_convert.err
+#SBATCH --job-name=m1_VLQlassification
+#SBATCH --output=log/std.out
+#SBATCH --error=log/std.err
 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=YOUREMAIL
+#SBATCH --mail-user={YOUREMAIL}
 
-python3 tree2hdf.py -d
-wait
-python3 tree2hdf.py -m
-wait
-python3 tree2hdf.py -r
+python3 {YOURCODE}
 ```
+You can check your job status with: ```squeue```. For more detail: [SLURM](https://slurm.schedmd.com/overview.html)
 
 2. training
 Train NN : you can even try different network: (shallow) DNN / RNN / CNN
