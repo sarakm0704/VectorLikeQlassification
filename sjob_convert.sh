@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=VLQlassification
-#SBATCH --output=log/std_m1_convert.out
-#SBATCH --error=log/std_m1_convert.err
+#SBATCH --job-name=m1_VLQlassification
+#SBATCH --output=log/std_convert.out
+#SBATCH --error=log/std_convert.err
 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
