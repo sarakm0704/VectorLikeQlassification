@@ -53,9 +53,9 @@ def makeCombi(inputDir, inputFile, outputDir, makeTrainingInput=False):
 
         event = i
 
-        #if (event % 2) == 0: continue  # select odd for training
+        if (event % 2) == 0: continue  # select odd for training
         #if (event % 2) != 0: continue  # select even for evaluation
-        if event > 100: continue
+        if event > 242080: continue
 
         evWeight = chain.evWeight
 
@@ -102,8 +102,7 @@ def makeCombi(inputDir, inputFile, outputDir, makeTrainingInput=False):
 
     tmp = inputFile[:-5]
 
-    combi = pd.DataFrame(jetCombi,columns=['signal','event','nseljets','nselbjets','jet1_pt','jet2_pt','jet3_pt','jet4_pt','jet5_pt','jet1_eta','jet2_eta','jet3_eta','jet4_eta','jet5_eta','jet1_e','jet2_e','jet3_e','jet4_e','jet5_e','jet1_btag','jet2_btag','jet3_btag','jet4_btag','jet5_btag',
-'evWeight'])
+    combi = pd.DataFrame(jetCombi,columns=['signal','event','nseljets','nselbjets','jet1_pt','jet2_pt','jet3_pt','jet4_pt','jet5_pt','jet1_eta','jet2_eta','jet3_eta','jet4_eta','jet5_eta','jet1_e','jet2_e','jet3_e','jet4_e','jet5_e','jet1_btag','jet2_btag','jet3_btag','jet4_btag','jet5_btag','evWeight'])
 
     if makeTrainingInput: combi = combi
     else: combi = combi.drop(['signal'], axis=1)
@@ -147,7 +146,7 @@ if __name__ == '__main__':
             
     (options,args) = parser.parse_args()
 
-    ntupleDir = './dnnTree/'
+    ntupleDir = './dnnTree/hadronic/'
     arrayDir = './arrayOut/'
 
     processes = []
@@ -161,7 +160,7 @@ if __name__ == '__main__':
         merge(arrayDir)
 
     if options.deep:
-        makeCombi(ntupleDir, 'tprime700_2018_had.root', arrayDir, True)
+        makeCombi(ntupleDir, 'tprimeAll_2018.root', arrayDir, True)
         makeCombi(ntupleDir, 'tthad2018.root', arrayDir, True)
 
     if options.random:
